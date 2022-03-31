@@ -1,0 +1,45 @@
+name: Django aplications
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: [ '5432:5432' ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+          architecture: x64
+      - name: Copying configurations
+        run: |
+          cp contrib/env-sample .env
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv sync --dev
+      - name: Lint with flake8
+        run: |
+          pipenv run flake8 .
+      - name: Test with pytest
+        run: |
+          pipenv run pytest --cov=pypro
+      - name: Posting Coverage
+        env:
+          CODECOV_TOKEN: ''
+        run: |
+          pipenv run codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+    
