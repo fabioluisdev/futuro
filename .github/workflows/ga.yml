@@ -22,9 +22,9 @@ jobs:
         with:
           python-version: 3.9
           architecture: x64
-      - name: Copying configurations
-        run: |
-          cp contrib/env-sample .env
+#      - name: Copying configurations
+#        run: |
+#          cp contrib/env-sample .env
       - name: Install dependencies
         run: |
           pip install pipenv
@@ -37,7 +37,7 @@ jobs:
           pipenv run pytest --cov=pypro
       - name: Posting Coverage
         env:
-          CODECOV_TOKEN: ''
+          CODECOV_TOKEN: '6806a337-c294-4081-af91-06ba932116c4'
         run: |
           pipenv run codecov
       - name: Upload coverage to Codecov
