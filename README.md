@@ -1,2 +1,2 @@
 # futuro
-Escola Futuro - Cursos de ATualizacao.
+Escola Futuro - Cursos de Atualizacao TI.
