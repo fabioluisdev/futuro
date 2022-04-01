@@ -22,9 +22,9 @@ jobs:
         with:
           python-version: 3.9
           architecture: x64
-#      - name: Copying configurations
-#        run: |
-#          cp contrib/env-sample .env
+      - name: Copying configurations
+        run: |
+          cp contrib/env-sample .env
       - name: Install dependencies
         run: |
           pip install pipenv
